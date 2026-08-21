@@ -4,53 +4,79 @@
 <title>Écran OFF — l'appli des activités sans écran</title>
 <meta name="description" content="Écran OFF : des centaines d'activités sans écran à faire en famille. Joue directement dans ton navigateur.">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600&family=Nunito:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
-  :root{--papier:#FDF6F0;--ink:#2B2A33;--coral:#E87058;--teal:#2EBCA1;--yellow:#F3D43D;--pink:#E275A4;--violet:#6A71D3;--green:#66A967;}
+  :root{--papier:#FDF6F0;--ink:#2B2A33;--body:#57535F;--muted:#A6A2AE;--coral:#E87058;--teal:#2EBCA1;--yellow:#F3D43D;--pink:#E275A4;--violet:#6A71D3;--green:#66A967;}
   *{box-sizing:border-box;} html,body{margin:0;padding:0;}
-  body{font-family:'Nunito',system-ui,sans-serif;color:var(--ink);background:var(--papier);min-height:100vh;display:flex;align-items:center;justify-content:center;padding:26px 18px;position:relative;overflow-x:hidden;}
-  .cf{position:fixed;z-index:0;}
-  .cf1{top:5%;left:7%;width:24px;height:24px;background:var(--yellow);border-radius:50%;}
-  .cf2{top:20%;right:8%;width:28px;height:28px;background:var(--pink);border-radius:50%;}
-  .cf3{bottom:12%;left:9%;width:30px;height:30px;background:var(--teal);border-radius:8px;transform:rotate(18deg);}
-  .cf4{bottom:8%;right:10%;width:26px;height:26px;background:var(--violet);border-radius:8px;transform:rotate(-14deg);}
-  .wrap{position:relative;z-index:1;width:100%;max-width:470px;text-align:center;}
-  .collection{font-family:'Fredoka';font-weight:600;letter-spacing:3px;text-transform:uppercase;font-size:12px;color:var(--teal);margin:0 0 2px;}
-  h1{font-family:'Fredoka';font-weight:700;font-size:44px;margin:0 0 14px;color:var(--ink);letter-spacing:.5px;}
-  /* téléphone */
-  .phone{width:236px;margin:0 auto;background:#2B2A33;border-radius:34px;padding:12px;box-shadow:0 16px 40px rgba(43,42,51,.22);position:relative;}
-  .notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:78px;height:16px;background:#2B2A33;border-radius:0 0 12px 12px;z-index:3;}
-  .screen{background:var(--papier);border-radius:24px;overflow:hidden;position:relative;aspect-ratio:9/17;}
+  body{font-family:'Nunito',system-ui,sans-serif;color:var(--body);background:var(--papier);min-height:100vh;
+    display:flex;flex-direction:column;align-items:center;justify-content:center;padding:40px 26px;position:relative;overflow-x:hidden;-webkit-font-smoothing:antialiased;}
+  .cf{position:fixed;z-index:0;opacity:.7;}
+  .cf1{top:12%;left:9%;width:14px;height:14px;background:var(--yellow);border-radius:50%;}
+  .cf2{top:20%;right:11%;width:16px;height:16px;background:var(--pink);border-radius:50%;}
+  .cf3{bottom:16%;left:12%;width:16px;height:16px;background:var(--teal);border-radius:5px;transform:rotate(16deg);}
+  .cf4{bottom:14%;right:12%;width:13px;height:13px;background:var(--violet);border-radius:50%;}
+  .hero{position:relative;z-index:1;display:flex;align-items:center;gap:64px;max-width:980px;width:100%;}
+  .left{flex:1;text-align:left;} .right{flex:0 0 auto;}
+  .collection{font-family:'Fredoka';font-weight:500;letter-spacing:4px;text-transform:uppercase;font-size:12px;color:var(--muted);margin:0 0 10px;}
+  h1{font-family:'Fredoka';font-weight:600;font-size:52px;line-height:1.02;margin:0 0 16px;color:var(--ink);letter-spacing:.3px;}
+  .tagline{font-family:'Fredoka';font-weight:500;font-size:19px;color:var(--coral);margin:0 0 14px;}
+  .sub{font-size:17px;font-weight:400;line-height:1.65;color:var(--body);margin:0 0 28px;max-width:400px;}
+  .cta{display:inline-block;font-family:'Fredoka';font-weight:500;font-size:17px;color:#fff;background:var(--coral);text-decoration:none;padding:14px 34px;border-radius:16px;box-shadow:0 10px 22px rgba(232,112,88,.26);transition:transform .15s,box-shadow .15s;}
+  .cta:hover{transform:translateY(-2px);box-shadow:0 14px 26px rgba(232,112,88,.30);}
+  /* badges stores (officiels à déposer) */
+  .badges{display:flex;gap:12px;margin-top:20px;flex-wrap:wrap;}
+  .badge img{height:44px;display:block;}
+  .soon{font-family:'Nunito';font-weight:500;color:var(--muted);font-size:13px;margin-top:18px;}
+  details{margin:20px 0 0;max-width:400px;background:#fff;border:1px solid #EFECF2;border-radius:16px;overflow:hidden;}
+  summary{font-family:'Fredoka';font-weight:500;color:var(--teal);cursor:pointer;padding:14px 18px;list-style:none;font-size:14px;}
+  summary::-webkit-details-marker{display:none;} summary::after{content:"＋";float:right;color:var(--muted);} details[open] summary::after{content:"－";}
+  .tip{padding:0 18px 16px;font-size:13.5px;line-height:1.6;font-weight:400;color:var(--body);} .tip b{font-family:'Fredoka';font-weight:500;color:var(--ink);}
+  /* téléphone + carrousel */
+  .phone{width:258px;background:#33313B;border-radius:40px;padding:12px;box-shadow:0 26px 54px rgba(43,42,51,.18);position:relative;}
+  .notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:80px;height:18px;background:#33313B;border-radius:0 0 12px 12px;z-index:3;}
+  .screen{background:#fff;border-radius:28px;overflow:hidden;position:relative;height:452px;}
   .shot{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;}
-  .mock{position:absolute;inset:0;padding:26px 14px 14px;display:flex;flex-direction:column;}
+  .mock{position:absolute;inset:0;overflow:hidden;}
+  .track{display:flex;width:300%;height:100%;animation:slide 12s infinite;}
+  @keyframes slide{0%,26%{transform:translateX(0);}33%,59%{transform:translateX(-33.333%);}66%,93%{transform:translateX(-66.666%);}100%{transform:translateX(0);}}
+  .slide{width:33.333%;height:100%;padding:32px 18px 26px;display:flex;flex-direction:column;}
   .apphead{display:flex;align-items:center;gap:8px;justify-content:center;}
-  .appmasc{width:26px;} .appname{font-family:'Fredoka';font-weight:700;font-size:16px;color:var(--ink);}
-  .appq{font-family:'Fredoka';font-weight:600;color:var(--coral);text-align:center;font-size:14px;margin:8px 0 10px;}
-  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
-  .tile{border:2px solid;border-radius:14px;padding:10px 6px;display:flex;flex-direction:column;align-items:center;gap:3px;}
-  .tile .ic{font-size:20px;line-height:1;} .tile .tl{font-family:'Fredoka';font-weight:600;font-size:11px;color:var(--ink);}
-  /* texte + cta */
-  .tagline{font-family:'Fredoka';font-weight:600;font-size:20px;color:var(--coral);margin:18px 0 2px;}
-  .sub{font-size:16px;font-weight:700;line-height:1.45;color:var(--ink);margin:0 auto 20px;max-width:360px;}
-  .cta{display:inline-block;font-family:'Fredoka';font-weight:700;font-size:20px;color:#fff;background:var(--coral);text-decoration:none;padding:16px 40px;border-radius:22px;box-shadow:0 6px 0 #c9583f;transition:transform .05s,box-shadow .05s;}
-  .cta:active{transform:translateY(4px);box-shadow:0 2px 0 #c9583f;}
-  .stores{display:none;gap:12px;justify-content:center;margin-top:16px;flex-wrap:wrap;}
-  .stores a{font-family:'Fredoka';font-weight:600;font-size:15px;text-decoration:none;color:var(--ink);background:#fff;border:2px solid var(--ink);border-radius:16px;padding:10px 18px;}
-  .soon{font-family:'Fredoka';font-weight:500;color:#9A96A3;font-size:14px;margin-top:16px;}
-  details{margin:22px auto 0;max-width:380px;background:#fff;border-radius:18px;box-shadow:0 5px 18px rgba(43,42,51,.07);text-align:left;overflow:hidden;}
-  summary{font-family:'Fredoka';font-weight:600;color:var(--teal);cursor:pointer;padding:14px 18px;list-style:none;font-size:15px;}
-  summary::-webkit-details-marker{display:none;} summary::after{content:"＋";float:right;color:#9A96A3;} details[open] summary::after{content:"－";}
-  .tip{padding:0 18px 16px;font-size:14px;line-height:1.5;font-weight:600;} .tip b{font-family:'Fredoka';color:var(--coral);}
-  footer{margin-top:24px;font-family:'Fredoka';font-weight:500;color:#B8B4BF;font-size:13px;}
+  .appmasc{width:26px;} .appname{font-family:'Fredoka';font-weight:600;font-size:16px;color:var(--ink);}
+  .appq{font-family:'Fredoka';font-weight:500;color:var(--coral);text-align:center;font-size:14px;margin:12px 0 14px;}
+  .tiles{display:grid;grid-template-columns:1fr 1fr;gap:10px;}
+  .tile{border:1px solid;border-radius:16px;padding:12px 6px;display:flex;flex-direction:column;align-items:center;gap:4px;}
+  .tile .ic{font-size:20px;} .tile .tl{font-family:'Fredoka';font-weight:500;font-size:11px;color:var(--body);}
+  .catslide{align-items:center;justify-content:flex-start;}
+  .catpill{color:#fff;font-family:'Fredoka';font-weight:500;font-size:13px;padding:5px 18px;border-radius:20px;}
+  .catill{width:150px;margin:26px 0;}
+  .catbtn{margin-top:auto;font-family:'Fredoka';font-weight:500;font-size:14px;color:#fff;background:var(--teal);padding:11px 30px;border-radius:16px;}
+  .dots{position:absolute;bottom:14px;left:0;right:0;display:flex;gap:6px;justify-content:center;z-index:2;}
+  .dots span{width:6px;height:6px;border-radius:50%;background:var(--muted);opacity:.5;}
+  footer{position:relative;z-index:1;margin-top:34px;font-family:'Fredoka';font-weight:400;color:#C4C0CB;font-size:12px;letter-spacing:.5px;}
+  @media (max-width:820px){
+    .hero{flex-direction:column-reverse;gap:32px;max-width:440px;text-align:center;}
+    .left{text-align:center;} h1{font-size:42px;} .sub{margin-left:auto;margin-right:auto;}
+    .badges{justify-content:center;} details{margin-left:auto;margin-right:auto;} .phone{width:224px;} .screen{height:392px;}
+  }
 </style></head>
 <body>
   <span class="cf cf1"></span><span class="cf cf2"></span><span class="cf cf3"></span><span class="cf cf4"></span>
-  <main class="wrap">
-    <p class="collection">La collection</p>
-    <h1>Écran OFF</h1>
-    <div class="phone"><div class="notch"></div><div class="screen">
-      <div class="mock">
-        <div class="apphead"><div class="appmasc"><svg style="width:100%;height:auto;display:block;" id="Calque_2" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1579.86 2676.87">
+  <main class="hero">
+    <div class="left">
+      <p class="collection">La collection</p>
+      <h1>Écran OFF</h1>
+      <p class="tagline">100&nbsp;% sans écran</p>
+      <p class="sub">Des centaines d'activités à faire en famille, loin des écrans. Découvre l'appli&nbsp;!</p>
+      <a id="cta" class="cta" href="https://ecran-off.vercel.app/">Jouer maintenant →</a>
+      <details><summary>Installer l'appli sur ton téléphone</summary>
+        <div class="tip"><p><b>iPhone / iPad :</b> ouvre le lien dans Safari, appuie sur <b>Partager</b> puis <b>Sur l'écran d'accueil</b>.</p>
+        <p style="margin-bottom:0"><b>Android :</b> ouvre le lien dans Chrome, menu <b>⋮</b> puis <b>Installer l'application</b>.</p></div>
+      </details>
+    </div>
+    <div class="right"><div class="phone"><div class="notch"></div><div class="screen">
+      <div class="mock"><div class="track">
+  <div class="slide">
+  <div class="apphead"><div class="appmasc"><svg style="width:100%;height:auto;display:block;" id="Calque_2" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1579.86 2676.87">
   
   <g id="Layer_1" data-name="Layer 1">
     <g>
@@ -105,22 +131,126 @@
     </g>
   </g>
 </svg></div><div class="appname">Écran OFF</div></div>
-        <p class="appq">On fait quoi&nbsp;?</p>
-        <div class="tiles"><div class="tile" style="background:#2EBCA122;border-color:#2EBCA1"><span class="ic">🧘</span><span class="tl">Calme</span></div><div class="tile" style="background:#E8705822;border-color:#E87058"><span class="ic">🏃</span><span class="tl">Mouvement</span></div><div class="tile" style="background:#6A71D322;border-color:#6A71D3"><span class="ic">🎲</span><span class="tl">Jeu</span></div><div class="tile" style="background:#E275A422;border-color:#E275A4"><span class="ic">🎨</span><span class="tl">Création</span></div><div class="tile" style="background:#66A96722;border-color:#66A967"><span class="ic">🔭</span><span class="tl">Exploration</span></div><div class="tile" style="background:#F3D43D22;border-color:#F3D43D"><span class="ic">🏆</span><span class="tl">Défi</span></div></div>
-      </div>
-      <img class="shot" src="app-screenshot.png" alt="Aperçu de l'app" onerror="this.remove()">
-    </div></div>
-    <p class="tagline">100&nbsp;% sans écran</p>
-    <p class="sub">Des centaines d'activités à faire en famille, loin des écrans. Découvre l'appli&nbsp;!</p>
-    <a id="cta" class="cta" href="https://ecran-off.vercel.app/">Jouer maintenant →</a>
-    <div class="stores" id="stores"><a id="ios" href="#">App Store</a><a id="android" href="#">Google Play</a></div>
-    <p class="soon" id="soon">Bientôt aussi sur l'App Store et Google&nbsp;Play</p>
-    <details><summary>Installer l'appli sur ton téléphone</summary>
-      <div class="tip"><p><b>iPhone / iPad :</b> ouvre le lien dans Safari, appuie sur <b>Partager</b> puis <b>Sur l'écran d'accueil</b>.</p>
-      <p style="margin-bottom:0"><b>Android :</b> ouvre le lien dans Chrome, menu <b>⋮</b> puis <b>Installer l'application</b>.</p></div>
-    </details>
-    <footer>© Écran OFF</footer>
+  <p class="appq">On fait quoi&nbsp;?</p>
+  <div class="tiles"><div class="tile" style="background:#2EBCA114;border-color:#2EBCA155"><span class="ic">🧘</span><span class="tl">Calme</span></div><div class="tile" style="background:#E8705814;border-color:#E8705855"><span class="ic">🏃</span><span class="tl">Mouvement</span></div><div class="tile" style="background:#6A71D314;border-color:#6A71D355"><span class="ic">🎲</span><span class="tl">Jeu</span></div><div class="tile" style="background:#E275A414;border-color:#E275A455"><span class="ic">🎨</span><span class="tl">Création</span></div><div class="tile" style="background:#66A96714;border-color:#66A96755"><span class="ic">🔭</span><span class="tl">Exploration</span></div><div class="tile" style="background:#F3D43D14;border-color:#F3D43D55"><span class="ic">🏆</span><span class="tl">Défi</span></div></div></div>
+  <div class="slide catslide">
+      <span class="catpill" style="background:#E87058">Mouvement</span>
+      <div class="catill"><svg style="width:100%;height:auto;display:block;" id="Calque_2" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1340.48 1822.07">
+  
+  <g id="Layer_1" data-name="Layer 1">
+    <g>
+      <g>
+        <path style="fill: #e8acb5" d="M353.34,1624.92c-23.72-21.2-74.53-132.39-104.18-200.3l248.32-439.41,278.73,66.69-322.81,603.62s-65.45.34-100.07-30.6Z"/>
+        <path style="fill: #5c93e5" d="M249.16,1424.63c29.64,67.91,80.46,179.1,104.18,200.3,34.62,30.94,100.07,30.6,100.07,30.6l-39.27,147.75c-6.11,23.01-37.73,25.59-47.5,3.88l-134.62-299.21c-8.34-18.54-7.36-39.95,2.64-57.66l14.5-25.67Z"/>
+      </g>
+      <g>
+        <path style="fill: #e8acb5" d="M599.48,1229.43l-94.32-45.94,214.97-194.98,149.47,101.52c60.44,41.05,72.35,125.26,25.66,181.47l-126.58,152.37-220.66-139.34,51.46-55.09Z"/>
+        <path style="fill: #5c93e5" d="M483.18,1353.94l64.84-69.42,220.66,139.34-4.65,161.12c-.94,32.63-39.38,49.5-64.03,28.1l-212.93-184.82c-22.12-19.2-23.88-52.92-3.89-74.32Z"/>
+      </g>
+      <path style="fill: #e8acb5" d="M803.26,655.36l258.13,51.8,112.44-71.83c46.74-29.86,108.48-19.59,143.04,23.79h0c38.87,48.79,28.6,120.24-22.43,156.12l-129.83,91.26c-37.13,26.1-83.19,36.18-127.83,27.97l-310.91-57.19,77.4-221.91Z"/>
+      <path style="fill: #e8acb5" d="M381.04,669.94l-212.13,87.08c-27.83,11.43-51.7,30.78-68.62,55.65l-80.24,117.92c-38.6,56.73-19.57,134.4,40.88,166.85h0c52.47,28.17,117.74,11.86,150.8-37.66l72.17-108.11,237.31-86.87-140.17-194.85Z"/>
+      <polygon style="fill: #fff" points="283.36 697.11 538.74 592.76 785.18 617.77 955.32 677.15 874.56 926.25 785.18 912.72 748.82 1000.39 346.45 1000.39 373.87 900.51 283.36 697.11"/>
+      <g>
+        <polygon style="fill: #5c93e5" points="770.67 616.3 785.18 617.77 879.49 650.69 396.96 650.69 481.12 616.3 770.67 616.3"/>
+        <polygon style="fill: #5c93e5" points="937.46 732.23 298.99 732.23 283.69 697.84 948.61 697.84 937.46 732.23"/>
+        <polygon style="fill: #5c93e5" points="911.03 813.77 335.27 813.77 319.97 779.38 922.18 779.38 911.03 813.77"/>
+        <polygon style="fill: #5c93e5" points="884.59 895.31 371.56 895.31 356.25 860.92 895.74 860.92 884.59 895.31"/>
+        <polygon style="fill: #5c93e5" points="758.58 976.85 352.91 976.85 362.35 942.46 772.84 942.46 758.58 976.85"/>
+      </g>
+      <g>
+        <path style="fill: #9b4b35" d="M261.96,276.51c1.32-8.3,3.46-16.32,6.33-23.99.09-.27.15-.43.15-.43h.02c17.8-47,63.2-80.41,116.42-80.41,68.74,0,124.47,55.73,124.47,124.47s-55.73,124.47-124.47,124.47c-39.96,0-75.49-18.85-98.27-48.12,1.04,16.1,4.89,33.3,11.01,51.39-47.89-45.48-42.86-111.93-35.66-147.39Z"/>
+        <path style="fill: #9b4b35" d="M762.81,15.29c25.68,0,49.54,7.78,69.36,21.11l-13.76-36.4c92.02,58.07,66.94,161.79,66.94,161.79l-.03-.07c-10.38,58.27-61.25,102.52-122.5,102.52-68.74,0-124.47-55.73-124.47-124.47s55.73-124.47,124.47-124.47Z"/>
+        <g>
+          <path style="fill: #9b4b35" d="M407.38,489.6c-1.98-8.13-3.63-16.39-4.91-24.79-1.05-6.88-1.88-13.83-2.44-20.88-1.38-17.44-1.17-34.63.5-51.45,7.33-73.99,42.99-140.6,96.69-187.76,45.03-39.54,102.75-65.42,167.08-70.51,49.12-3.89,96.33,4.8,138.48,23.35,51.43,22.64,95.3,59.98,125.88,107.11l-252.81-63.59s-103.74,225.13-268.48,288.52Z"/>
+          <path style="fill: #e8acb5" d="M675.87,201.08l252.81,63.59c4.15,6.4,8.07,12.97,11.72,19.72,5.96,11.02,11.24,22.48,15.75,34.35,9.51,25,15.67,51.74,17.89,79.75,1.07,13.5,1.18,26.86.41,40.01-5.5,93.36-56.06,176.15-131.61,224.85-38.7,24.95-83.96,40.96-133.08,44.85-108.09,8.56-206.95-43.76-262.88-128.17-17.99-27.14-31.51-57.61-39.49-90.43,164.74-63.4,268.48-288.52,268.48-288.52Z"/>
+        </g>
+        <g>
+          <path style="fill: #fff" d="M733.43,430.04c3.37,30.96,20.84,55.41,41.54,60.94-6.83,7.79-15.31,12.76-24.85,13.8-27.73,3.02-53.9-28.4-58.45-70.19-4.56-41.79,14.23-78.11,41.96-81.14,9.54-1.04,18.89,2,27.24,8.13-19.03,9.86-30.81,37.5-27.43,68.46Z"/>
+          <path d="M792.08,423.65c2.99,27.42-4.07,52.48-17.11,67.33-20.7-5.53-38.16-29.98-41.54-60.94-3.37-30.96,8.41-58.6,27.43-68.46,15.93,11.69,28.22,34.65,31.21,62.06Z"/>
+        </g>
+        <path d="M753.83,525.75c-2.66,17.12-16.06,31.34-34.09,34.23-18.66,2.99-36.39-7.08-43.87-23.47l77.97-10.76Z"/>
+        <path d="M636.82,472.42c-1.31,0-2.6-.57-3.47-1.68-1.51-1.92-1.19-4.7.73-6.21l30.42-24.06-39.28-9.65c-2.37-.58-3.82-2.98-3.24-5.35.58-2.37,2.97-3.83,5.35-3.24l48.05,11.81c1.64.4,2.91,1.7,3.27,3.35.36,1.65-.25,3.36-1.58,4.41l-37.51,29.67c-.81.64-1.78.95-2.74.95Z"/>
+        <circle style="fill: #e8959d" cx="578.3" cy="536.49" r="40.36" transform="translate(-148.27 229.34) rotate(-19.94)"/>
+        <circle style="fill: #e8959d" cx="858.77" cy="484.89" r="40.36" transform="translate(-109.59 298.14) rotate(-18.53)"/>
+        <path style="fill: #9b4b35" d="M675.87,171.68s98.3,13.45,30.68,139.78l-15.38-64.8s5.4,66.77-85.9,72.34l-26.96-66.46,97.57-80.86Z"/>
+        <circle style="fill: #e8acb5" cx="416.18" cy="500.31" r="93.17" transform="translate(-231.88 440.82) rotate(-45)"/>
+        <path d="M856.48,192.9c-1.19,0-2.37-.47-3.24-1.41-.32-.34-18.06-19.04-51.1-34.68-30.56-14.46-80.88-29.2-147.06-17.26-2.4.44-4.7-1.16-5.13-3.57-.43-2.4,1.16-4.7,3.57-5.13,68.7-12.39,121.02,3.04,152.81,18.16,34.57,16.44,52.64,35.66,53.4,36.47,1.66,1.79,1.56,4.59-.23,6.25-.85.79-1.93,1.18-3.01,1.18Z"/>
+        <path d="M400.54,396.9c-.1,0-.19,0-.29,0-2.44-.16-4.28-2.26-4.13-4.7,6.89-106.96,63.47-155.42,65.87-157.43,1.87-1.57,4.66-1.32,6.23.56,1.56,1.87,1.32,4.66-.55,6.22h0c-.56.47-56.09,48.27-62.72,151.22-.15,2.34-2.1,4.14-4.41,4.14Z"/>
+      </g>
+      <path style="fill: #355377" d="M747.74,1000.09l84.83,57.17-239.63,188.51h-134.2s-198.13-24.12-112.29-245.38l401.29-.3Z"/>
+      <path d="M500.37,1339.96c-1.08,0-2.16-.39-3.02-1.19-1.78-1.67-1.88-4.46-.21-6.25l76.33-81.72c1.67-1.78,4.46-1.88,6.25-.21,1.78,1.67,1.88,4.46.21,6.25l-76.33,81.72c-.87.93-2.05,1.4-3.23,1.4Z"/>
+      <path d="M444.77,1094.45c-1.9,0-3.66-1.24-4.23-3.15-.7-2.34.63-4.8,2.97-5.5,52.33-15.67,45.77-60.33,45.47-62.23-.39-2.41,1.24-4.68,3.65-5.07,2.41-.39,4.68,1.23,5.07,3.63.09.54,8.27,54.19-51.65,72.14-.42.13-.85.19-1.27.19Z"/>
+      <path d="M785.18,899.73c-.58,0-1.17-.11-1.73-.36-2.25-.96-3.29-3.56-2.33-5.8l42.87-100.47c.96-2.25,3.56-3.29,5.8-2.33,2.25.96,3.29,3.56,2.33,5.8l-42.87,100.47c-.72,1.68-2.35,2.69-4.07,2.69Z"/>
+      <path d="M396.96,912.98c-1.88,0-3.62-1.21-4.22-3.09-.73-2.33.56-4.81,2.89-5.55l99.47-31.35c2.33-.73,4.81.56,5.55,2.89.73,2.33-.56,4.81-2.89,5.55l-99.47,31.35c-.44.14-.89.21-1.33.21Z"/>
+    </g>
+  </g>
+</svg></div>
+      <div class="catbtn">C'est parti&nbsp;!</div></div>
+  <div class="slide catslide">
+      <span class="catpill" style="background:#E275A4">Création</span>
+      <div class="catill"><svg style="width:100%;height:auto;display:block;" id="Calque_2" data-name="Calque 2" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1557.29 1434.26">
+  
+  <g id="Layer_1" data-name="Layer 1">
+    <g>
+      <g>
+        <path style="fill: #514242" d="M754.83,567.01C380.27,546.7,72.24,442.39,4.17,321.98c-2.27,7.17-3.64,14.48-4.04,21.91-7.7,141.98,334.61,275.98,764.58,299.29,429.96,23.32,784.76-72.88,792.46-214.86.99-18.3-3.84-36.46-13.91-54.27-41.03,129.81-380.97,215.04-788.42,192.94Z"/>
+        <path style="fill: #3a3030" d="M792.58,129.04C385.13,106.94,45.2,192.17,4.17,321.98c68.08,120.41,376.1,224.71,750.66,245.03,407.45,22.1,747.38-63.13,788.42-192.94-68.08-120.41-376.1-224.71-750.66-245.03Z"/>
+      </g>
+      <g>
+        <polygon style="fill: #efca75" points="1028.35 543.54 892.7 861.11 1014.43 1033.88 1245.89 855.28 1028.35 543.54"/>
+        <path style="fill: #a56b4e" d="M1458.15,1159.45l-212.26-304.17-231.46,178.6,205.94,292.3c47.57,67.52,141.8,81.81,207.25,31.44h0c61.47-47.3,74.91-134.56,30.52-198.17Z"/>
+      </g>
+      <path style="fill: #efca75" d="M1028.74,598.41v-299.63l-679.03-122.6-1.34,3.61c-44.84,121.06-28.99,221.81-28.99,221.81,0,0-93.95,199.24,117.54,284.34l620.84,194.01-29.02-281.53Z"/>
+      <g>
+        <g>
+          <circle cx="937.07" cy="1179.25" r="85.15" transform="translate(-559.3898 1008.0051) rotate(-45)"/>
+          <circle cx="982.12" cy="1293.77" r="67.16" transform="translate(-274.55 264.6) rotate(-13.48)"/>
+          <circle cx="946.67" cy="1382.64" r="51.62" transform="translate(-390.43 372.68) rotate(-18.54)"/>
+        </g>
+        <g>
+          <g>
+            <g>
+              <path d="M333.7,885.72c-.04,10.39.35,20.86,1.23,31.39.72,8.61,1.72,17.26,3.08,25.94,3.37,21.48,8.59,42.2,15.46,62.05,30.22,87.32,92.55,157.54,171.08,199.04,65.85,34.8,143.08,49.41,222.32,36.99,60.5-9.48,115.05-33.61,160.64-68.2,55.63-42.21,97.87-100.01,121.24-165.8l-287.22,149.85s-190.38-242.17-407.82-271.24Z"/>
+              <path style="fill: #a56b4e" d="M741.52,1156.97l287.22-149.85c3.17-8.93,6.01-18.01,8.47-27.22,4.02-15.04,7.1-30.42,9.13-46.07,4.27-32.96,4-67.07-1.4-101.56-2.61-16.63-6.32-32.81-11.06-48.49-33.6-111.27-118.62-196.74-223.99-233.8-53.99-18.99-113.31-25.27-173.8-15.79-133.13,20.86-237.51,112.64-280.75,230.81-13.91,38-21.45,78.73-21.63,120.71,217.43,29.07,407.82,271.24,407.82,271.24Z"/>
+            </g>
+            <g>
+              <path style="fill: #fff" d="M646.32,853.18c14.1,0,27.28,5.01,38.51,13.71,8.34,6.46,15.58,14.98,21.34,24.97,1.87-8.97,2.91-18.5,2.91-28.4,0-34.27-12.09-64.29-30.2-80.88-9.49-8.7-20.64-13.71-32.56-13.71-34.66,0-62.76,42.35-62.76,94.59,0,9.9,1.01,19.44,2.89,28.41,13.51-23.45,35.29-38.69,59.87-38.69Z"/>
+              <path d="M646.32,958.05c11.92,0,23.07-5.01,32.56-13.71,12.88-11.8,22.68-30.4,27.29-52.48-5.76-9.99-13-18.51-21.34-24.97-11.23-8.7-24.41-13.71-38.51-13.71-24.58,0-46.36,15.24-59.87,38.69,8.01,38.35,31.78,66.17,59.87,66.17Z"/>
+            </g>
+            <g>
+              <path style="fill: #fff" d="M768.93,853.18c14.1,0,27.28,5.01,38.51,13.71,8.34,6.46,15.58,14.98,21.34,24.97,1.87-8.97,2.91-18.5,2.91-28.4,0-34.27-12.09-64.29-30.2-80.88-9.49-8.7-20.64-13.71-32.56-13.71-34.66,0-62.76,42.35-62.76,94.59,0,9.9,1.01,19.44,2.89,28.41,13.51-23.45,35.29-38.69,59.87-38.69Z"/>
+              <path d="M768.93,958.05c11.92,0,23.07-5.01,32.56-13.71,12.88-11.8,22.68-30.4,27.29-52.48-5.76-9.99-13-18.51-21.34-24.97-11.23-8.7-24.41-13.71-38.51-13.71-24.58,0-46.36,15.24-59.87,38.69,8.01,38.35,31.78,66.17,59.87,66.17Z"/>
+            </g>
+            <path d="M705.82,698.58c-28.69,0-52.86,19.37-60.14,45.75l119.5-2.62c-8.11-25.03-31.62-43.13-59.36-43.13Z"/>
+            <circle style="fill: #c9805b" cx="526.76" cy="779.72" r="50.15" transform="translate(-324.266 1181.2036) rotate(-81.2146)"/>
+            <circle style="fill: #c9805b" cx="880.67" cy="761.12" r="50.15" transform="translate(-6.0285 1515.206) rotate(-81.2146)"/>
+            <path d="M786.23,1191.99s129.97-108.26-50.89-219.96l-2.22,66.3s.97-23.13-111-3.51l-13.4,88.12,177.5,69.05Z"/>
+          </g>
+          <circle style="fill: #a56b4e" cx="341.24" cy="870.25" r="115.78" transform="translate(-515.41 496.18) rotate(-45)"/>
+        </g>
+        <circle style="fill: #a56b4e" cx="341.24" cy="870.25" r="115.78" transform="translate(-515.41 496.18) rotate(-45)"/>
+        <g>
+          <circle cx="453.02" cy="1195.21" r="85.15" transform="translate(-712.46 670.4) rotate(-45)"/>
+          <circle cx="357.13" cy="1272.35" r="67.16" transform="translate(-479.1 249.06) rotate(-23.58)"/>
+          <circle cx="343.87" cy="1367.11" r="51.62" transform="translate(-237.02 82.66) rotate(-10.22)"/>
+        </g>
+      </g>
+      <path style="fill: #3f728e" d="M525.89,130.01l21.42,83.22,481.43,85.56,71.82-131.91c-94.03-18.69-198.13-31.88-307.97-37.84-93.37-5.06-183.2-4.49-266.7.97Z"/>
+      <circle style="fill: #a56b4e" cx="525.89" cy="176.19" r="176.19"/>
+      <circle cx="740.63" cy="475.57" r="19.02" transform="translate(107.6222 1087.1187) rotate(-76.7174)"/>
+      <circle cx="740.63" cy="401.6" r="19.02" transform="translate(-67.05 641.33) rotate(-45)"/>
+      <path style="fill: #a56b4e" d="M608.73,222.95l-151.67,225.08-137.68-46.43s-29.41-225.42,49.42-287.96l239.93,109.31Z"/>
+      <path d="M476.59,340.82c-.26,0-.52-.02-.79-.06-.91-.13-22.59-3.37-48.76-18.82-24.08-14.21-56.65-41.9-75.09-93.15-1.03-2.86.45-6,3.31-7.03,2.85-1.03,6,.45,7.03,3.31,13.85,38.5,37.37,67.82,69.91,87.16,24.37,14.48,44.96,17.62,45.16,17.65,3,.44,5.08,3.22,4.65,6.22-.4,2.74-2.74,4.71-5.43,4.71Z"/>
+      <path d="M461.37,549.04c-3.03,0-5.49-2.46-5.49-5.49v-59.21c0-3.03,2.46-5.49,5.49-5.49s5.49,2.46,5.49,5.49v59.21c0,3.03-2.46,5.49-5.49,5.49Z"/>
+    </g>
+  </g>
+</svg></div>
+      <div class="catbtn">C'est parti&nbsp;!</div></div>
+</div><div class="dots"><span></span><span></span><span></span></div></div>
+      <img class="shot" src="app-screenshot.png" alt="" onerror="this.remove()">
+    </div></div></div>
   </main>
+  <footer>© Écran OFF</footer>
 <script>
   // ====== À CONFIGURER ======
   const LINKS = { web:"https://ecran-off.vercel.app/", ios:"", android:"" };
@@ -129,9 +259,6 @@
   function platform(){const u=navigator.userAgent||navigator.vendor||"";if(/iPad|iPhone|iPod/i.test(u))return"ios";if(/Android/i.test(u))return"android";return"web";}
   function target(){const p=platform();if(p==="ios"&&LINKS.ios)return LINKS.ios;if(p==="android"&&LINKS.android)return LINKS.android;return LINKS.web;}
   document.getElementById("cta").href=target();
-  if(LINKS.ios||LINKS.android){document.getElementById("stores").style.display="flex";document.getElementById("soon").style.display="none";
-    const i=document.getElementById("ios"),a=document.getElementById("android");
-    if(LINKS.ios)i.href=LINKS.ios;else i.style.display="none"; if(LINKS.android)a.href=LINKS.android;else a.style.display="none";}
   if(AUTO_REDIRECT)window.location.href=target();
 </script>
 </body></html>
